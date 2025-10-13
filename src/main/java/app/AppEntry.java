@@ -1,23 +1,33 @@
 package app;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import configuration.PropertiesProvider;
+import model.Order;
 import utility.ResourceReader;
 
-import java.io.IOException;
+import java.util.List;
 
 public class AppEntry {
     public static void main(String[] args) {
-        System.out.println(PropertiesProvider.TEST_PATH);
-        ResourceReader reader = new ResourceReader();
-
         try {
-            reader.getFiles(PropertiesProvider.TEST_PATH, "");
-            String s = reader.resourceToString(PropertiesProvider.TEST_PATH + "order.json");
-            System.out.println(s);
-        } catch(IOException e) {
+            ResourceReader reader = new ResourceReader();
+            ObjectMapper objectMapper = new ObjectMapper();
+            List<String> testFiles = reader.readResourceFiles(PropertiesProvider.TEST_PATH, ".*.json");
+            List<Order> orders = testFiles.stream()
+                .map(s -> {
+                    try {
+                        return objectMapper.readValue(s, Order.class);
+                    } catch (JsonProcessingException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .toList();
+            for(Order order: orders) {
+                System.out.println(objectMapper.writeValueAsString(order));
+            }
+        } catch(Exception e) {
             System.out.println(e.getMessage());
         }
-
-        Thread s;
     }
 }

@@ -1,0 +1,23 @@
+{
+  "name": "Marian",
+  "surname": "Paździoch",
+  "email": "paździoch@o2.pl",
+  "phone": "+48111222333",
+  "products": [
+    {
+      "productId": "18",
+      "quantity" : "5",
+      "unit": "KILOGRAM"
+    },
+    {
+      "productId": "3",
+      "quantity" : "2",
+      "unit": "UNIT"
+    },
+    {
+      "productId": "62",
+      "quantity" : "12",
+      "unit": "UNIT"
+    }
+  ]
+}

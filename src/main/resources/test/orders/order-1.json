@@ -2,17 +2,17 @@
   "name": "Grażyna",
   "surname": "Kopytko",
   "email": "kopytko@wp.pl",
-  "nrTel": "+48123456789",
+  "phone": "+48123456789",
   "products": [
     {
       "productId": "123",
       "quantity" : "3",
-      "unit": "u"
+      "unit": "UNIT"
     },
     {
       "productId": "124",
       "quantity" : "5",
-      "unit": "u"
+      "unit": "UNIT"
     }
   ]
 }
