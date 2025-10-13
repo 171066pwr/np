@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Enumeration;
 import java.util.List;
 
 public class ResourceReader {
@@ -41,5 +43,22 @@ public class ResourceReader {
 //        }
 //    }
 
+    public List<String> getFiles(String path, String pattern) throws IOException {
+        ClassLoader classLoader = getClass().getClassLoader();
+        Enumeration<URL> resources = classLoader.getResources(path);
+        while (resources.hasMoreElements()) {
+            URL resource = resources.nextElement();
+            System.out.println(resource.getFile());
+        }
 
+//        if (inputStream == null) {
+//            throw new IllegalArgumentException("file not found! " + resourceName);
+//        } else {
+//            InputStreamReader streamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+//            BufferedReader reader = new BufferedReader(streamReader);
+//            return reader.lines().toList();
+//        }
+        return null;
+    }
 }
+

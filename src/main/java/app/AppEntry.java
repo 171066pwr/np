@@ -1,4 +1,4 @@
-package web;
+package app;
 
 import configuration.PropertiesProvider;
 import utility.ResourceReader;
@@ -11,6 +11,7 @@ public class AppEntry {
         ResourceReader reader = new ResourceReader();
 
         try {
+            reader.getFiles(PropertiesProvider.TEST_PATH, "");
             String s = reader.resourceToString(PropertiesProvider.TEST_PATH + "order.json");
             System.out.println(s);
         } catch(IOException e) {
