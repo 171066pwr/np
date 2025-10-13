@@ -1,10 +1,10 @@
-package app;
+package com.mycompany.app;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import configuration.PropertiesProvider;
-import model.Order;
-import utility.ResourceReader;
+import com.mycompany.app.configuration.PropertiesProvider;
+import com.mycompany.app.model.Order;
+import com.mycompany.app.utility.ResourceReader;
 
 import java.util.List;
 

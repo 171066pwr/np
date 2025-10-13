@@ -1,6 +1,6 @@
-package utility;
+package com.mycompany.app.utility;
 
-import configuration.PropertiesProvider;
+import com.mycompany.app.configuration.PropertiesProvider;
 
 import java.io.BufferedReader;
 import java.io.IOException;
