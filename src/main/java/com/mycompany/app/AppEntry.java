@@ -8,8 +8,11 @@ import com.mycompany.app.utility.ResourceReader;
 
 import java.util.List;
 
+/**
+ * @since 1.0
+ */
 public class AppEntry {
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         try {
             ResourceReader reader = new ResourceReader();
             ObjectMapper objectMapper = new ObjectMapper();
@@ -23,10 +26,10 @@ public class AppEntry {
                     }
                 })
                 .toList();
-            for(Order order: orders) {
+            for (Order order: orders) {
                 System.out.println(objectMapper.writeValueAsString(order));
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }

@@ -6,14 +6,14 @@ record Product(
         String productId,
         BigDecimal quantity,
         Units unit
-){
+) {
     public enum Units {
         UNIT("u"),
         KILOGRAM("kg");
-        private final String unit;
+        private final String name;
 
-        Units(String unit) {
-            this.unit = unit;
+        Units(String name) {
+            this.name = name;
         }
     }
 }

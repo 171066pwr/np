@@ -8,8 +8,8 @@ import org.apache.commons.configuration2.builder.fluent.Parameters;
 import org.apache.commons.configuration2.ex.ConfigurationException;
 
 public final class PropertiesProvider {
-    public static final Configuration configuration = loadAppProperties();
-    public static final String TEST_PATH = configuration.getString("test.orders.path");
+    public static final Configuration CONFIGURATION = loadAppProperties();
+    public static final String TEST_PATH = CONFIGURATION.getString("test.orders.path");
     private static final String FILENAME = "appsettings.properties";
 
     private static Configuration loadAppProperties() {
@@ -18,14 +18,13 @@ public final class PropertiesProvider {
                         .configure(new Parameters().properties().setFileName(FILENAME));
         try {
             return builder.getConfiguration();
-        }
-        catch(ConfigurationException cex) {
+        } catch (ConfigurationException cex) {
             throw new ConfigurationLoadingException();
         }
     }
 
     static class ConfigurationLoadingException extends RuntimeException {
-        public ConfigurationLoadingException() {
+        ConfigurationLoadingException() {
             super("Could not load app settings from file " + FILENAME);
         }
     }

@@ -24,6 +24,13 @@ public class ResourceReader {
             .toList();
     }
 
+    /**
+     * Test of javadoc creation;
+     * @param path
+     * @param pattern
+     * @return
+     * @throws IOException
+     */
     private List<String> getResourceFiles(String path, String pattern) throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
         List<String> filenames = new ArrayList<>();
