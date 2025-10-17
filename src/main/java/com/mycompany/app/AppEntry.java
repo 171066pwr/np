@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.app.configuration.PropertiesProvider;
 import com.mycompany.app.model.Order;
-import com.mycompany.app.utility.ResourceReader;
+import com.mycompany.app.utility.SourceReader;
 
 import java.util.List;
 
@@ -13,24 +13,24 @@ import java.util.List;
  */
 public class AppEntry {
     public static void main(final String[] args) {
-        try {
-            ResourceReader reader = new ResourceReader();
-            ObjectMapper objectMapper = new ObjectMapper();
-            List<String> testFiles = reader.readResourceFiles(PropertiesProvider.TEST_PATH, ".*.json");
-            List<Order> orders = testFiles.stream()
-                .map(s -> {
-                    try {
-                        return objectMapper.readValue(s, Order.class);
-                    } catch (JsonProcessingException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .toList();
-            for (Order order: orders) {
+        SourceReader reader = new SourceReader();
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<String> testFiles = reader.readFiles(PropertiesProvider.TEST_PATH, ".*.json");
+        List<Order> orders = testFiles.stream()
+            .map(s -> {
+                try {
+                    return objectMapper.readValue(s, Order.class);
+                } catch (JsonProcessingException e) {
+                    throw new RuntimeException(e);
+                }
+            })
+            .toList();
+        for (Order order: orders) {
+            try {
                 System.out.println(objectMapper.writeValueAsString(order));
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
         }
     }
 }

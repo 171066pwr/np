@@ -9,7 +9,7 @@ import org.apache.commons.configuration2.ex.ConfigurationException;
 
 public final class PropertiesProvider {
     public static final Configuration CONFIGURATION = loadAppProperties();
-    public static final String TEST_PATH = CONFIGURATION.getString("test.orders.path");
+    public static final String TEST_PATH = CONFIGURATION.getString("orders.path");
     private static final String FILENAME = "appsettings.properties";
 
     private static Configuration loadAppProperties() {

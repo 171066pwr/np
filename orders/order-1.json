@@ -1,0 +1,18 @@
+{
+  "name": "Dockerowy",
+  "surname": "Kopytko",
+  "email": "kopytko@wp.pl",
+  "phone": "+48123456789",
+  "products": [
+    {
+      "productId": "123",
+      "quantity" : "3",
+      "unit": "UNIT"
+    },
+    {
+      "productId": "124",
+      "quantity" : "5",
+      "unit": "UNIT"
+    }
+  ]
+}

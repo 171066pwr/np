@@ -3,3 +3,5 @@ services:
     build:
       dockerfile: Dockerfile
       context: .
+    volumes:
+      - /orders
