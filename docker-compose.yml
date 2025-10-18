@@ -4,4 +4,4 @@ services:
       dockerfile: Dockerfile
       context: .
     volumes:
-      - /orders
+      - ./orders:/my-app/orders
