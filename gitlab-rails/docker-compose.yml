@@ -1,0 +1,49 @@
+services:
+  gitlab:
+    image: "gitlab/gitlab-ce:18.3.2-ce.0"
+    container_name: "gitlab"
+    environment:
+      GITLAB OMNIBUS CONFIG: |
+        gitlab rails[’time_zone’] = ’Europe/Warsaw’
+        external url ’http://host.docker.internal:4321’
+        letsencrypt[’enable’] = false
+        nginx[’listen_port’] = 4321
+        nginx[’listen_https’] = false
+        nginx[’redirect_http_to_https’] = false
+        nginx[’gzip_enabled’] = false
+        gitlab kas[’enable’] = false
+        gitlab rails[’smtp_enable’] = false
+        mattermost[’enable’] = false
+        prometheus[’enable’] = false
+        alertmanager[’enable’] = false
+        prometheus monitoring[’enable’] = false
+        postgres exporter[’enable’] = false
+        node exporter[’enable’] = false
+        redis exporter[’enable’] = false
+        monitoring role[’enable’] = false
+        gitlab exporter[’enable’] = false
+        puma[’worker_processes’] = 0
+        sidekiq[’concurrency’] = 10
+        gitlab rails[’usage_ping_enabled’] = false
+        logrotate[’enable’] = false
+        gitlab rails[’gitlab_kas_enabled’] = false
+        redis sentinel role[’enable’] = false
+        sentinel[’enable’] = false
+        gitlab rails[’registry_enabled’] = false
+        sidekiq[’metrics_enabled’] = false
+        sidekiq[’health_checks_enabled’] = false
+        gitlab rails[’kerberos_enabled’] = false
+        gitlab rails[’packages_enabled’] = false
+        gitlab rails[’dependency_proxy_enabled’] = false
+        gitlab rails[’geo_registry_replication_enabled’] = false
+        gitlab rails[’gitlab_email_enabled’] = false
+        gitlab rails[’incoming_email_enabled’] = false
+        gitlab rails[’artifacts_enabled’] = false
+        gitlab rails[’lfs_enabled’] = false
+        gitlab rails[’terraform_state_enabled’] = false
+        gitlab rails[’ci_secure_files_enabled’] = false
+        ports:
+        - "4321:4321"
+        volumes:
+        - "./config:/etc/gitlab"
+        - "./data:/var/opt/gitlab"
