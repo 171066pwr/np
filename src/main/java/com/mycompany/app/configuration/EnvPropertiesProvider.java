@@ -6,6 +6,6 @@ public class EnvPropertiesProvider extends PropertiesProvider {
     @Override
     public String getTestPath() {
         String testPath = System.getenv(ENV_VARIABLE_NAME);
-        return testPath == null ? super.getTestPath() : testPath;
+        return testPath == null || testPath.isBlank() ? super.getTestPath() : testPath;
     }
 }
