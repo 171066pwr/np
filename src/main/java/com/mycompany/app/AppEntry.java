@@ -1,5 +1,6 @@
 package com.mycompany.app;
 
+import com.mycompany.app.configuration.EnvPropertiesProvider;
 import com.mycompany.app.configuration.PropertiesProvider;
 import com.mycompany.app.utility.PeriodicFileReader;
 
@@ -9,8 +10,9 @@ import com.mycompany.app.utility.PeriodicFileReader;
  */
 public class AppEntry {
     public static void main(final String[] args) {
+        PropertiesProvider properties = new EnvPropertiesProvider();
         PeriodicFileReader reader = PeriodicFileReader.builder()
-                .path(PropertiesProvider.TEST_PATH)
+                .path(properties.getTestPath())
                 .regex(".*.json")
                 .build();
         reader.run();

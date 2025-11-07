@@ -1,5 +1,6 @@
 package com.mycompany.app.configuration;
 
+import lombok.Getter;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.FileBasedConfiguration;
 import org.apache.commons.configuration2.PropertiesConfiguration;
@@ -7,10 +8,15 @@ import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
 import org.apache.commons.configuration2.builder.fluent.Parameters;
 import org.apache.commons.configuration2.ex.ConfigurationException;
 
-public final class PropertiesProvider {
-    public static final Configuration CONFIGURATION = loadAppProperties();
-    public static final String TEST_PATH = CONFIGURATION.getString("orders.path");
+public class PropertiesProvider {
+    @Getter
+    private Configuration configuration = loadAppProperties();
+    private static final String TEST_PATH = "orders.path";
     private static final String FILENAME = "appsettings.properties";
+
+    public PropertiesProvider() {
+        this.configuration = loadAppProperties();
+    }
 
     private static Configuration loadAppProperties() {
         FileBasedConfigurationBuilder<FileBasedConfiguration> builder =
@@ -21,6 +27,14 @@ public final class PropertiesProvider {
         } catch (ConfigurationException cex) {
             throw new ConfigurationLoadingException();
         }
+    }
+
+    public void reloadAppProperties() {
+        this.configuration = loadAppProperties();
+    }
+
+    public String getTestPath() {
+        return configuration.getString(TEST_PATH);
     }
 
     static class ConfigurationLoadingException extends RuntimeException {
