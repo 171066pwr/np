@@ -9,7 +9,9 @@ record Product(
 ) {
     public enum Units {
         UNIT("u"),
-        KILOGRAM("kg");
+        GRAM("g"),
+        KILOGRAM("kg"),
+        TONNE("t");
         private final String name;
 
         Units(String name) {
