@@ -10,7 +10,7 @@ import org.apache.commons.configuration2.ex.ConfigurationException;
 
 public class PropertiesProvider {
     @Getter
-    private Configuration configuration = loadAppProperties();
+    private Configuration configuration;
     private static final String TEST_PATH = "orders.path";
     private static final String FILENAME = "appsettings.properties";
 
