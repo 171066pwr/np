@@ -15,7 +15,7 @@ class OrderValidatorTest {
     private final OrderValidator validator = new OrderValidator();
 
     @Test
-    void testValidatePositive() {
+    void validatePositive() {
         List<Order> orders = reader.readFromFiles(resourcePath, "positive.*.json");
         for(Order order: orders) {
             Assertions.assertTrue(validator.validate(order));
@@ -23,7 +23,7 @@ class OrderValidatorTest {
     }
 
     @Test
-    void testValidateNegative() {
+    void validateNegative() {
         List<Order> orders = reader.readFromFiles(resourcePath, "negative.*.json");
         for(Order order: orders) {
             Assertions.assertFalse(validator.validate(order));
@@ -31,14 +31,14 @@ class OrderValidatorTest {
     }
 
     @Test
-    void testWithFixture() {
+    void withFixture() {
         var fixture = new Fixture();
         Order order = fixture.create(Order.class);
         Assertions.assertFalse(validator.validate(order));
     }
 
     @Test
-    void testShowingWhyFixtureIsBadHere() {
+    void showingWhyFixtureIsBadHere() {
         var fixture = new Fixture();
         Order order = fixture.build(Order.class)
                 .with("products", fixture.build(Product.class).createMany(9).collect(Collectors.toList()))
@@ -51,7 +51,7 @@ class OrderValidatorTest {
     }
 
     @Test
-    void testFixtureWithConfigStillBad() {
+    void fixtureWithConfigStillBad() {
         var config = Configuration.configure()
                 .collectionSizeRange(1, 9)
                 .usePositiveNumbersOnly(true);
