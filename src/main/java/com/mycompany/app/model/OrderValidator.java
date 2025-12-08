@@ -21,7 +21,7 @@ public class OrderValidator {
         boolean result = products.size() > 0 && products.size() < 10;
         result &= products.stream()
                 .allMatch(this::validateProduct);
-        result &= 2000 <= products.stream()
+        result &= 2000 >= products.stream()
                 .mapToDouble(this::mapQuantityToKilograms)
                 .sum();
         return result;

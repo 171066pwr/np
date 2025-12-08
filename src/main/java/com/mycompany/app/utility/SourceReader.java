@@ -19,7 +19,7 @@ public class SourceReader {
             .toList();
     }
 
-    private String fileToString(String resource) {
+    String fileToString(String resource) {
         try (Scanner scanner = new Scanner(new File(resource))) {
             List<String> contents = scanner.tokens().toList();
             return String.join("\n", contents);

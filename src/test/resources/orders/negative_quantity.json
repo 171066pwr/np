@@ -1,0 +1,13 @@
+{
+  "name": "Imię",
+  "surname": "Nazwisko",
+  "email": "kopytko@wp.pl",
+  "phone": "+48123456789",
+  "products": [
+    {
+      "productId": "1",
+      "quantity" : "-1",
+      "unit": "TONNE"
+    }
+  ]
+}
