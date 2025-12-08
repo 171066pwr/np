@@ -1,0 +1,53 @@
+{
+  "name": "Imię",
+  "surname": "Nazwisko",
+  "email": "kopytko@wp.pl",
+  "phone": "+48123456789",
+  "products": [
+    {
+      "productId": "1",
+      "quantity" : "1",
+      "unit": "TONNE"
+    },
+    {
+      "productId": "2",
+      "quantity" : "0.3",
+      "unit": "TONNE"
+    },
+    {
+      "productId": "3",
+      "quantity" : "0.2",
+      "unit": "TONNE"
+    },
+    {
+      "productId": "4",
+      "quantity" : "300",
+      "unit": "KILOGRAM"
+    },
+    {
+      "productId": "5",
+      "quantity" : "190",
+      "unit": "KILOGRAM"
+    },
+    {
+      "productId": "6",
+      "quantity" : "9",
+      "unit": "KILOGRAM"
+    },
+    {
+      "productId": "7",
+      "quantity" : "800",
+      "unit": "GRAM"
+    },
+    {
+      "productId": "8",
+      "quantity" : "100",
+      "unit": "GRAM"
+    },
+    {
+      "productId": "9",
+      "quantity" : "100",
+      "unit": "GRAM"
+    }
+  ]
+}

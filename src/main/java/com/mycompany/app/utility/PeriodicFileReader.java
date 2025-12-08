@@ -1,21 +1,17 @@
 package com.mycompany.app.utility;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mycompany.app.model.Order;
 import lombok.Builder;
+import lombok.experimental.SuperBuilder;
 
 import java.time.Instant;
 import java.util.List;
 
-@Builder
-public class PeriodicFileReader implements Runnable {
-    private final SourceReader reader = new SourceReader();
-    private final ObjectMapper objectMapper = new ObjectMapper();
+@SuperBuilder
+public class PeriodicFileReader<T> extends ObjectFileReader<T> implements Runnable {
     private final String path;
     private final String regex;
     @Builder.Default
-    private long repetitions = 10;
+    private long repetitions = 100;
     @Builder.Default
     private long period = 10000;
 
@@ -35,19 +31,10 @@ public class PeriodicFileReader implements Runnable {
     }
 
     private void readFiles() {
-        List<String> testFiles = reader.readFiles(path, regex);
-        List<Order> orders = testFiles.stream()
-                .map(s -> {
-                    try {
-                        return objectMapper.readValue(s, Order.class);
-                    } catch (JsonProcessingException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .toList();
-        for (Order order: orders) {
+        List<T> objects = readFromFiles(path, regex);
+        for (T t: objects) {
             try {
-                System.out.println(objectMapper.writeValueAsString(order));
+                System.out.println(objectMapper.writeValueAsString(t));
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
