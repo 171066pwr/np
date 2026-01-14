@@ -26,3 +26,20 @@ test_job:
   script:
     - "mvn test"
 
+deploy_job:
+  rules:
+    - if: $CI_COMMIT_TAG
+  image: docker:28.4.0
+  tags:
+    - runner
+  stage: deploy
+  variables:
+    DOCKER_TLS_CERTDIR: ""
+  services:
+    - name: docker:28.4.0-dind
+      alias: docker
+      command:
+        - "--insecure-registry=host.docker.internal:5000"
+  script:
+    - "docker build -t my-app:1.0.0"
+    - "docker tag my-app:1.0.0 host.docker.internal:5000/my-app:1.0.0"
