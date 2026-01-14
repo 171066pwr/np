@@ -1,0 +1,45 @@
+image: maven:3.9.12-amazoncorretto-21
+
+stages:
+  - build
+  - test
+  - deploy
+
+cache:
+  paths:
+    - .m2/repository
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+
+build_job:
+  tags:
+    - runner
+  stage: build
+  script:
+    - "mvn compile"
+
+test_job:
+  tags:
+    - runner
+  stage: test
+  script:
+    - "mvn test"
+
+deploy_job:
+  rules:
+    - if: $CI_COMMIT_TAG
+  image: docker:28.4.0
+  tags:
+    - runner
+  stage: deploy
+  variables:
+    DOCKER_TLS_CERTDIR: ""
+  services:
+    - name: docker:28.4.0-dind
+      alias: docker
+      command:
+        - "--insecure-registry=host.docker.internal:5000"
+  script:
+    - "docker build -t my-app:1.0.0"
+    - "docker tag my-app:1.0.0 host.docker.internal:5000/my-app:1.0.0"
