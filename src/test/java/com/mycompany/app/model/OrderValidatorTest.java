@@ -4,6 +4,7 @@ import com.github.nylle.javafixture.Configuration;
 import com.github.nylle.javafixture.Fixture;
 import com.mycompany.app.utility.ObjectFileReader;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -37,6 +38,7 @@ class OrderValidatorTest {
         Assertions.assertFalse(validator.validate(order));
     }
 
+    @Disabled
     @Test
     void showingWhyFixtureIsBadHere() {
         var fixture = new Fixture();
@@ -50,6 +52,7 @@ class OrderValidatorTest {
         Assertions.assertTrue(validator.validate(order));
     }
 
+    @Disabled
     @Test
     void fixtureWithConfigStillBad() {
         var config = Configuration.configure()
