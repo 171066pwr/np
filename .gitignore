@@ -8,6 +8,10 @@ gitlab-rails/config/
 gitlab-rails/data/
 gitlab-rails/logs/
 
+### gitlab-runner ###
+gitlab-runner/config
+gitlab-runner/var
+
 ### IntelliJ IDEA ###
 .idea/modules.xml
 .idea/jarRepositories.xml

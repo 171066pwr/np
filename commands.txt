@@ -1,0 +1,7 @@
+docker pull amazoncorretto:25-alpine
+docker pull localhost:5000/amazoncorretto:25-alpine
+docker push localhost:5000/amazoncorretto:25-alpine
+docker build -t localhost:5000/my-app:1.0.0 .
+
+docker exec -it <container_id> <command>
+docker exec -it a450bd0f19ff sh

@@ -5,7 +5,7 @@ services:
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         gitlab_rails['time_zone'] = 'Europe/Warsaw'
-        external_url 'http://host.docker.internal:4321'
+        external_url 'http://host.docker.internal:3000'
         letsencrypt['enable'] = false
         nginx['listen_port'] = 4321
         nginx['listen_https'] = false
