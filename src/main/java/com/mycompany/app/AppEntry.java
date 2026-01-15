@@ -11,6 +11,7 @@ import com.mycompany.app.utility.PeriodicFileReader;
  */
 public class AppEntry {
     public static void main(final String[] args) {
+        System.out.println("Application version: " + getAppVersion());
         PropertiesProvider properties = new EnvPropertiesProvider();
 
         PeriodicFileReader reader = PeriodicFileReader.builder()
@@ -19,5 +20,9 @@ public class AppEntry {
                 .regex(".*.json")
                 .build();
         reader.run();
+    }
+
+    static String getAppVersion() {
+        return AppEntry.class.getPackage().getImplementationVersion();
     }
 }
