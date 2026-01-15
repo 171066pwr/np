@@ -11,35 +11,40 @@ import org.apache.commons.configuration2.ex.ConfigurationException;
 public class PropertiesProvider {
     @Getter
     private Configuration configuration;
-    private static final String TEST_PATH = "orders.path";
-    private static final String FILENAME = "appsettings.properties";
+    private final String filename;
 
-    public PropertiesProvider() {
-        this.configuration = loadAppProperties();
-    }
-
-    private static Configuration loadAppProperties() {
-        FileBasedConfigurationBuilder<FileBasedConfiguration> builder =
-                new FileBasedConfigurationBuilder<FileBasedConfiguration>(PropertiesConfiguration.class)
-                        .configure(new Parameters().properties().setFileName(FILENAME));
-        try {
-            return builder.getConfiguration();
-        } catch (ConfigurationException cex) {
-            throw new ConfigurationLoadingException();
-        }
+    PropertiesProvider(String filename) {
+        this.filename = filename;
+        this.configuration = loadProperties();
     }
 
     public void reloadAppProperties() {
-        this.configuration = loadAppProperties();
+        this.configuration = loadProperties();
     }
 
-    public String getTestPath() {
-        return configuration.getString(TEST_PATH);
+    public String getProperty(String key) {
+        return configuration.getString(key);
+    }
+
+    public String getPropertyOrEnv(String key, String env) {
+        String value = System.getenv(env);
+        return value == null || value.isBlank() ? getProperty(key) : value;
+    }
+
+    private Configuration loadProperties() {
+        FileBasedConfigurationBuilder<FileBasedConfiguration> builder =
+                new FileBasedConfigurationBuilder<FileBasedConfiguration>(PropertiesConfiguration.class)
+                        .configure(new Parameters().properties().setFileName(filename));
+        try {
+            return builder.getConfiguration();
+        } catch (ConfigurationException cex) {
+            throw new ConfigurationLoadingException(filename);
+        }
     }
 
     static class ConfigurationLoadingException extends RuntimeException {
-        ConfigurationLoadingException() {
-            super("Could not load app settings from file " + FILENAME);
+        ConfigurationLoadingException(String filename) {
+            super("Could not load app settings from file " + filename);
         }
     }
 }

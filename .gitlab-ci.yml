@@ -4,6 +4,7 @@ stages:
   - build
   - test
   - deploy
+  - push-image
 
 cache:
   paths:
@@ -17,6 +18,7 @@ build_job:
     - runner
   stage: build
   script:
+    - "echo $CI_COMMIT_TAG"
     - "mvn compile"
 
 test_job:
@@ -41,5 +43,5 @@ deploy_job:
       command:
         - "--insecure-registry=host.docker.internal:5000"
   script:
-    - "docker build -t my-app:1.0.0"
-    - "docker tag my-app:1.0.0 host.docker.internal:5000/my-app:1.0.0"
+    - "docker build -t host.docker.internal:5000/my-app:1.0.0 -t host.docker.internal:5000/my-app:$CI_COMMIT_TAG"
+    - "docker "

@@ -1,7 +1,7 @@
 package com.mycompany.app;
 
-import com.mycompany.app.configuration.EnvPropertiesProvider;
-import com.mycompany.app.configuration.PropertiesProvider;
+import com.mycompany.app.configuration.AppPropertiesProvider;
+import com.mycompany.app.configuration.MavenPropertiesProvider;
 import com.mycompany.app.model.Order;
 import com.mycompany.app.utility.PeriodicFileReader;
 
@@ -11,8 +11,9 @@ import com.mycompany.app.utility.PeriodicFileReader;
  */
 public class AppEntry {
     public static void main(final String[] args) {
-        System.out.println("Application version: " + getAppVersion());
-        PropertiesProvider properties = new EnvPropertiesProvider();
+        MavenPropertiesProvider mavenProperties = new MavenPropertiesProvider();
+        System.out.println("Application version: " + mavenProperties.getVersion());
+        AppPropertiesProvider properties = new AppPropertiesProvider();
 
         PeriodicFileReader reader = PeriodicFileReader.builder()
                 .clazz((Class) Order.class)
@@ -20,9 +21,5 @@ public class AppEntry {
                 .regex(".*.json")
                 .build();
         reader.run();
-    }
-
-    static String getAppVersion() {
-        return AppEntry.class.getPackage().getImplementationVersion();
     }
 }
