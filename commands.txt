@@ -5,3 +5,5 @@ docker build -t localhost:5000/my-app:1.0.0 .
 
 docker exec -it <container_id> <command>
 docker exec -it a450bd0f19ff sh
+
+gitlab-runner register --url http://host.docker.internal:3000 --token <token from gitlab runner creation>
