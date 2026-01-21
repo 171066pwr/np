@@ -2,10 +2,12 @@ package com.mycompany.app.utility;
 
 import lombok.Builder;
 import lombok.experimental.SuperBuilder;
+import lombok.extern.log4j.Log4j2;
 
 import java.time.Instant;
 import java.util.List;
 
+@Log4j2
 @SuperBuilder
 public class PeriodicFileReader<T> extends ObjectFileReader<T> implements Runnable {
     private final String path;
@@ -24,7 +26,7 @@ public class PeriodicFileReader<T> extends ObjectFileReader<T> implements Runnab
             try {
                 Thread.sleep(period);
             } catch (InterruptedException e) {
-                System.out.println("Periodic reader interrupted.");
+                log.error("Periodic reader interrupted.");
                 return;
             }
         }
@@ -34,16 +36,16 @@ public class PeriodicFileReader<T> extends ObjectFileReader<T> implements Runnab
         List<T> objects = readFromFiles(path, regex);
         for (T t: objects) {
             try {
-                System.out.println(objectMapper.writeValueAsString(t));
+                log.info(objectMapper.writeValueAsString(t));
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                log.error(e.getMessage());
             }
         }
     }
 
     private void printExecutionTime() {
-        System.out.println("###########################");
-        System.out.println(Instant.now().toString());
-        System.out.println("###########################");
+        log.info("###########################");
+        log.info(Instant.now().toString());
+        log.info("###########################");
     }
 }

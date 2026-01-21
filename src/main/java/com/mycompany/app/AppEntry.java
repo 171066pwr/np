@@ -4,15 +4,17 @@ import com.mycompany.app.configuration.AppPropertiesProvider;
 import com.mycompany.app.configuration.MavenPropertiesProvider;
 import com.mycompany.app.model.Order;
 import com.mycompany.app.utility.PeriodicFileReader;
+import lombok.extern.log4j.Log4j2;
 
 /**
  * Test of javadoc creation.
  * @since 1.0
  */
+@Log4j2
 public class AppEntry {
     public static void main(final String[] args) {
         MavenPropertiesProvider mavenProperties = new MavenPropertiesProvider();
-        System.out.println("Application version: " + mavenProperties.getVersion());
+        log.info("Application version: " + mavenProperties.getVersion());
         AppPropertiesProvider properties = new AppPropertiesProvider();
 
         PeriodicFileReader reader = PeriodicFileReader.builder()
