@@ -3,7 +3,8 @@ package com.mycompany.app;
 import com.mycompany.app.configuration.AppPropertiesProvider;
 import com.mycompany.app.configuration.MavenPropertiesProvider;
 import com.mycompany.app.model.Order;
-import com.mycompany.app.utility.PeriodicFileReader;
+import com.mycompany.app.utility.MailService;
+import com.mycompany.app.utility.OrderMailSender;
 import lombok.extern.log4j.Log4j2;
 
 /**
@@ -16,11 +17,13 @@ public class AppEntry {
         MavenPropertiesProvider mavenProperties = new MavenPropertiesProvider();
         log.info("Application version: " + mavenProperties.getVersion());
         AppPropertiesProvider properties = new AppPropertiesProvider();
+        MailService service = new MailService(properties.getProperties());
 
-        PeriodicFileReader reader = PeriodicFileReader.builder()
-                .clazz((Class) Order.class)
+        OrderMailSender reader = OrderMailSender.builder()
                 .path(properties.getTestPath())
                 .regex(".*.json")
+                .clazz((Class) Order.class)
+                .mailService(service)
                 .build();
         reader.run();
     }

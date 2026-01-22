@@ -25,9 +25,17 @@ public class ObjectFileReader<T> {
                 .toList();
     }
 
-    private T mapToObject(String string) {
+    public T mapToObject(String string) {
         try {
             return objectMapper.readValue(string, clazz);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String mapToString(T object) {
+        try {
+            return objectMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

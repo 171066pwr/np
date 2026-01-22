@@ -8,6 +8,8 @@ import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
 import org.apache.commons.configuration2.builder.fluent.Parameters;
 import org.apache.commons.configuration2.ex.ConfigurationException;
 
+import java.util.Properties;
+
 public class PropertiesProvider {
     @Getter
     private Configuration configuration;
@@ -29,6 +31,14 @@ public class PropertiesProvider {
     public String getPropertyOrEnv(String key, String env) {
         String value = System.getenv(env);
         return value == null || value.isBlank() ? getProperty(key) : value;
+    }
+
+    public Properties getProperties() {
+        Properties properties = new Properties();
+        configuration.getKeys().forEachRemaining(
+                entry -> properties.put(entry, configuration.getProperty(entry))
+        );
+        return properties;
     }
 
     private Configuration loadProperties() {

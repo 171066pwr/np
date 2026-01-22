@@ -3,6 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+
 ### gitlab-rails ###
 gitlab-rails/config/
 gitlab-rails/data/

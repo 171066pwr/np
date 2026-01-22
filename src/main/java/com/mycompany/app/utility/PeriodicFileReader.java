@@ -21,8 +21,7 @@ public class PeriodicFileReader<T> extends ObjectFileReader<T> implements Runnab
     @Override
     public void run() {
         while (repetitions > 0) {
-            printExecutionTime();
-            readFiles();
+            performActions();
             repetitions--;
             try {
                 Thread.sleep(period);
@@ -31,6 +30,15 @@ public class PeriodicFileReader<T> extends ObjectFileReader<T> implements Runnab
                 return;
             }
         }
+    }
+
+    protected void performActions() {
+        printExecutionTime();
+        readFiles();
+    }
+
+    public List<T> readFromFiles() {
+        return super.readFromFiles(path, regex);
     }
 
     private void readFiles() {
