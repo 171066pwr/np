@@ -1,5 +1,6 @@
 package com.mycompany.app.utility;
 
+import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.Builder;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.log4j.Log4j2;
@@ -33,6 +34,7 @@ public class PeriodicFileReader<T> extends ObjectFileReader<T> implements Runnab
     }
 
     private void readFiles() {
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         List<T> objects = readFromFiles(path, regex);
         for (T t: objects) {
             try {
