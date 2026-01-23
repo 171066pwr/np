@@ -3,6 +3,7 @@ package com.mycompany.app;
 import com.mycompany.app.configuration.AppPropertiesProvider;
 import com.mycompany.app.configuration.MavenPropertiesProvider;
 import com.mycompany.app.model.Order;
+import com.mycompany.app.model.OrderValidator;
 import com.mycompany.app.utility.MailService;
 import com.mycompany.app.utility.OrderMailSender;
 import lombok.extern.log4j.Log4j2;
@@ -20,10 +21,11 @@ public class AppEntry {
         MailService service = new MailService(properties.getProperties());
 
         OrderMailSender reader = OrderMailSender.builder()
+                .mailService(service)
+                .orderValidator(new OrderValidator())
                 .path(properties.getTestPath())
                 .regex(".*.json")
                 .clazz((Class) Order.class)
-                .mailService(service)
                 .build();
         reader.run();
     }

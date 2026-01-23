@@ -3,6 +3,11 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### mailpit ###
+mailpit/data
+
+### open-observe ###
+open-observe/data
 
 ### gitlab-rails ###
 gitlab-rails/config/
@@ -46,3 +51,4 @@ build/
 
 ### Mac OS ###
 .DS_Store
+/open-telemetry/opentelemetry-javaagent.jar

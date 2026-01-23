@@ -1,12 +1,22 @@
 package com.mycompany.app.model;
 
+import io.opentelemetry.instrumentation.annotations.WithSpan;
+import lombok.extern.log4j.Log4j2;
+
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
+@Log4j2
 public class OrderValidator {
+    @WithSpan
     public boolean validate(Order order) {
-        return validateName(order) && validateProducts(order.getProducts());
+        if(validateName(order) && validateProducts(order.getProducts())) {
+            return true;
+        } else {
+            log.info("Order validation failed: " + order.getOrderId());
+            return false;
+        }
     }
 
     private boolean validateName(Order order) {
