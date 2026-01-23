@@ -2,3 +2,9 @@
 .gitignore
 target
 orders
+gitlab-rails
+gitlab-runner
+local-docker-registry
+mailpit
+open-observe
+open-telemetry

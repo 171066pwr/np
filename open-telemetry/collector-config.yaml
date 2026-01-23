@@ -1,0 +1,23 @@
+receivers:
+  otlp:
+    protocols:
+      http:
+        endpoint: "0.0.0.0:4318"
+exporters:
+  otlphttp/openobserve:
+    endpoint: http://host.docker.internal:5080/api/default
+    headers:
+      Authorization: Basic cm9vdEBleGFtcGxlLmNvbTpwYXNz
+      stream-name: default
+  debug:
+service:
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      exporters: [debug]
+    traces:
+      receivers: [otlp]
+      exporters: [otlphttp/openobserve]
+    logs:
+      receivers: [otlp]
+      exporters: [debug]

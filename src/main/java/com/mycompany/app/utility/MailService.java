@@ -1,5 +1,6 @@
 package com.mycompany.app.utility;
 
+import io.opentelemetry.instrumentation.annotations.WithSpan;
 import jakarta.mail.Message;
 import jakarta.mail.Multipart;
 import jakarta.mail.Session;
@@ -17,9 +18,9 @@ import java.util.Properties;
 @RequiredArgsConstructor
 public class MailService {
     private final static String HOST_ADDRESS = "kopytko@gmail.com";
-
     private final Properties properties;
 
+    @WithSpan
     public void sendMail(String address, String message) {
         Session session = Session.getDefaultInstance(properties);
         try {
